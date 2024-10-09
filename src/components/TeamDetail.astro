@@ -1,0 +1,99 @@
+---
+const { team_key } = Astro.props;
+
+const teamResponse = await fetch(
+    `https://apiv2.allsportsapi.com/football/?&met=Teams&teamId=${team_key}&APIkey=${process.env.ALL_SPORT_API_KEY}`
+)
+
+const teamDetails = await teamResponse.json()
+const team = teamDetails && teamDetails.result  ? teamDetails.result[0] : {}
+
+console.log(teamDetails.result, team_key, team)
+---
+
+<team >
+    <div class="container">
+        <div class="details">
+            <h1> {team.team_name} </h1>
+            <img transition:name={team.team_name}  src={team.team_logo} alt={team.team_name} />
+            <a href="/teams" class="menu"> Volver </a>
+        </div>
+        <div class="playes">
+            { 
+                team.players.map((player) => {
+                    return (
+                    <div class="player">
+                        <img src={player.player_image} alt={player.player_name} />
+                        <p>{player.player_name}</p>
+                    </div>
+                    )
+                })
+            }
+        </div>
+    </div>
+</team>
+
+<style>
+    .container {
+        display: flex;
+        align-items: start;
+        gap: 10px;
+        padding: 30px;
+        border-radius: 10px;
+        background-color: #e2eeee;
+    }
+
+    .details {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 30px;
+        justify-content: flex-start;
+        align-items: center;
+        min-width: fit-content;
+    }
+
+    .playes {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 40px;
+        padding: 50px;
+        width: 100%;
+    }
+
+    .player {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 30px;
+        border-radius: 10px;
+        background-color: #e2eeee;
+    }
+
+    .player img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+    }
+
+    a {
+		display: inline-block;
+		text-decoration: none;
+		font-size: 1.25rem;
+		padding: 5px;
+		border-radius: 0.5rem;
+		color: white;
+		background-color: #033d25;
+		transition: all 0.3s ease;
+        margin-top: 10px;
+	}
+
+	a:hover {
+		background-color: var(--hover-default-color);
+		color: #333;
+		margin-top: -5px;
+		rotate: 3deg;
+		border-bottom: 5px solid #785ff1;
+	}
+</style>

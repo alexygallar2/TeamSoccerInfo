@@ -1,0 +1,46 @@
+---
+import Layout from '../layouts/Layout.astro';
+export const prerender = true;
+---
+
+<Layout title="La Liga Clone">
+	<main>
+		<h1> Bienvenido a la Liga Info Results </h1>
+
+		<div class="container">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">Card title</h5>
+					<p class="card-text">
+						Some quick example text to build on the card title and make up the bulk of
+						the card's content.
+					</p>
+				</div>
+			</div>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	main {
+		background-color: #252525;
+		height: 100vh;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 0px;
+	}
+
+	h1 {
+		color: white;
+	}
+
+	.container {
+		max-width: 800px;
+		padding: 20px;
+		background-color: #0b0c0c;
+		border-radius: 10px;
+		color: snow;
+	}
+</style>

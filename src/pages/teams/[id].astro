@@ -1,0 +1,54 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import TeamDetail from '../../components/TeamDetail.astro'
+
+export async function getStaticPaths() {
+
+    const teams = await fetch(
+        `https://apiv2.allsportsapi.com/football/?&met=Teams&leagueId=302&APIkey=${process.env.ALL_SPORT_API_KEY}`
+    )
+    const jsonTeams = await teams.json()
+
+    return jsonTeams?.result?.map(team => {
+        return {
+            params: { id: team.team_key},
+        }
+    })
+}  
+
+const { id } = Astro.params;
+
+export const prerender = true;
+---
+
+<Layout title="La Liga Clone">
+    <main>
+        <TeamDetail team_key={ id }>
+            <span slot="fallback" class="loading"> Loading ...</span>
+        </TeamDetail>
+    </main>
+</Layout>
+
+<style>
+    main {
+
+    }
+
+    h1 {
+        color: white;
+    }
+
+    .container {
+        max-width: 800px;
+        padding: 20px;
+        background-color: #0b0c0c;
+        border-radius: 10px;
+        color: snow;
+    }
+
+    .loading {
+        color: aliceblue;
+    }
+</style>
+
+

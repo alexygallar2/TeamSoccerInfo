@@ -1,0 +1,17 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Team from "../components/Teams.astro";
+export const prerender = true;
+---
+
+<Layout title="La Liga Clone">
+  <main>
+    <Team >
+        <span slot="fallback">Loading...</span>
+    </Team>
+  </main>
+</Layout>
+
+<style>
+
+</style>

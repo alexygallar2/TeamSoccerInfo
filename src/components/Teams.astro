@@ -1,0 +1,89 @@
+---
+const teams = await fetch(
+  `https://apiv2.allsportsapi.com/football/?&met=Teams&leagueId=302&APIkey=${process.env.ALL_SPORT_API_KEY}`
+);
+
+const jsonTeams = await teams.json();
+---
+
+<teams>
+  <h1>Equipos</h1>
+  <div class="teams">
+    {
+      jsonTeams.result.map((team) => {
+        return (
+          <div class="team">
+            <a href={`/teams/${team.team_key}`}>{team.team_name}</a>
+            <img
+              transition:name={team.team_name}
+              src={team.team_logo}
+              alt={team.team_name}
+            />
+          </div>
+        );
+      })
+    }
+  </div>
+</teams>
+
+<style>
+  .teams {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    padding: 50px;
+  }
+
+  .team {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 30px;
+    border-radius: 10px;
+    background-color: #e2eeee;
+  }
+
+  .playes {
+    display: flex;
+    gap: 10px;
+    overflow-x: scroll;
+    max-width: 100%;
+    padding: 30px 10px;
+  }
+
+  .player {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: x-small;
+    font-weight: bold;
+    padding: 20px;
+  }
+
+  .player img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+
+  a {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 1.25rem;
+    padding: 5px;
+    border-radius: 0.5rem;
+    color: white;
+    background-color: #033d25;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+  }
+
+  a:hover {
+    background-color: var(--hover-default-color);
+    color: #333;
+    margin-top: -5px;
+    rotate: 3deg;
+    border-bottom: 5px solid #785ff1;
+  }
+</style>
