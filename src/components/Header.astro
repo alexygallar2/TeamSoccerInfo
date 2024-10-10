@@ -1,5 +1,5 @@
 ---
-import { Icon } from 'astro-icon/components'
+import { Icon } from 'astro-icon/components';
 ---
 
 
@@ -26,18 +26,37 @@ import { Icon } from 'astro-icon/components'
 
 <style>
 	header {
-		box-shadow: 0px 0px 10px rgba(247, 33, 33, 0.1);
+		box-shadow: 0px 0px 10px var(--dark-default-color);
+		background-color: var(--main-color);
+		border-radius: 0 0 10px 10px;
+		border-bottom: 2px solid var(--light-default-color);
 		display: flex;
 		flex-direction: column;
         position: sticky;
         top: 0;
-		z-index: 1;
+		z-index: 2;
+		animation: change-color linear forwards;
+		animation-timeline: scroll(root block);
+	}
+
+	@keyframes change-color {
+ 	 	from { 
+			background: var(--main-color); 
+			color: var(--dark-default-color);
+			box-shadow: 0px 0px 10px var(--dark-default-color);
+			border-bottom: 2px solid var(--light-default-color);
+		}
+  		to { 
+			background: var(--dark-default-color);
+			color: var(--light-default-color);
+			box-shadow: 0px 0px 10px var(--light-default-color);
+			border-bottom: 3px solid var(--hover-default-color);
+		}
 	}
 
 	nav {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
-		background-color: var(--main-color);
 	}
 
 	.logo {
@@ -52,7 +71,7 @@ import { Icon } from 'astro-icon/components'
 	.logo svg {
 		width: 96px;
 		height: 64px;
-		color: springgreen;
+		color: var(--light-default-color);
 		fill: currentColor;
 	}
 
@@ -80,17 +99,17 @@ import { Icon } from 'astro-icon/components'
 		font-size: 1.25rem;
 		padding: 0.5rem 1rem;
 		border-radius: 0.5rem;
-		color: white;
+		color: var(--light-default-color);
 		background-color: var(--accent-gradient);
 		transition: all 0.3s ease;
 	}
 
 	.menu a:hover {
 		background-color: var(--hover-default-color);
-		color: #333;
+		color: var(--dark-default-color);
 		margin-top: -20px;
 		rotate: 5deg;
-		border-bottom: 5px solid #785ff1;
+		border-bottom: 5px solid var(--border-default-color);
 	}
 
 	.social {
@@ -108,7 +127,7 @@ import { Icon } from 'astro-icon/components'
 	.social a svg {
 		width: auto;
     	height: 1.75rem;
-    	color: white;
+    	color: var(--light-default-color);
     	fill: currentColor;
     	transition: all 0.3s ease;
   	}

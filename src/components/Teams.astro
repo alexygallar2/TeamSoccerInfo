@@ -29,9 +29,9 @@ const jsonTeams = await teams.json();
 <style>
   .teams {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 40px;
-    padding: 50px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    padding: 40px;
   }
 
   .team {
@@ -41,7 +41,25 @@ const jsonTeams = await teams.json();
     gap: 10px;
     padding: 30px;
     border-radius: 10px;
-    background-color: #e2eeee;
+    background: var(--accent-gradient);
+    transition: all 0.5s ease-in-out;
+    animation: teamScrollAnimation linear forwards;
+    animation-timeline: view(block 80% auto);
+  }
+
+  @keyframes teamScrollAnimation {
+    from { scale: 0; opacity: 0; backdrop-filter: blur(50px); }
+    to { scale: 1; opacity: 1; backdrop-filter: blur(0px); }
+  }
+ 
+
+  .team:hover {
+    background: var(--accent-gradient-hover);
+    transition: all 0.8s ease-in-out;
+
+    img {
+      transform: scale(1.1);  
+    }
   }
 
   .playes {
@@ -73,17 +91,17 @@ const jsonTeams = await teams.json();
     font-size: 1.25rem;
     padding: 5px;
     border-radius: 0.5rem;
-    color: white;
-    background-color: #033d25;
+    color: var(--light-default-color);
+    background-color: var(--main-color);
     transition: all 0.3s ease;
     margin-top: 10px;
   }
 
   a:hover {
     background-color: var(--hover-default-color);
-    color: #333;
+    color: var(--dark-default-color);
     margin-top: -5px;
     rotate: 3deg;
-    border-bottom: 5px solid #785ff1;
+    border-bottom: 5px solid var(--border-default-color);
   }
 </style>
